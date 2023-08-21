@@ -6,12 +6,12 @@ Documentation
 ## Funcionalidades
 
 A API deve conter as seguintes funcionalidades:
-[] Criação de uma task
-[] Listagem de todas as tasks
+[x] Criação de uma task
+[x] Listagem de todas as tasks
 [] Atualização de uma task pelo id
-[] Remover uma task pelo id
+[x] Remover uma task pelo id
 [] Marcar pelo id uma task como completa
-[] E o verdadeiro desafio: Importação de tasks em massa por um arquivo CSV
+[] Importação de tasks em massa por um arquivo CSV
 
 ## Rotas e regras de negócio
 
@@ -27,12 +27,12 @@ Antes das rotas, vamos entender qual a estrutura (propriedades) que uma task dev
 ### Rotas
 
 **POST - /tasks**
-[] Deve ser possível criar uma task no banco de dados, enviando os campos title e description por meio do body da requisição.
-[] Deve ser possível criar uma task no banco de dados, enviando os campos title e description por meio do body da requisição.
+[x] Deve ser possível criar uma task no banco de dados, enviando os campos title e description por meio do body da requisição.
+[x] Ao criar uma task, os campos: `id`, `created_at`, `updated_at` e `completed_at` devem ser preenchidos automaticamente, conforme a orientação das propriedades acima.
 
 **GET - /tasks**
-[] Deve ser possível listar todas as tasks salvas no banco de dados.
-[] Também deve ser possível realizar uma busca, filtrando as tasks pelo `title` e `description`.
+[x] Deve ser possível listar todas as tasks salvas no banco de dados.
+[x] Também deve ser possível realizar uma busca, filtrando as tasks pelo `title` e `description`.
 
 **PUT - /tasks/:id**
 [] Deve ser possível atualizar uma task pelo `id`.
@@ -41,8 +41,8 @@ Antes das rotas, vamos entender qual a estrutura (propriedades) que uma task dev
 [] Antes de realizar a atualização, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
 **DELETE - /tasks/:id**
-[] Deve ser possível remover uma task pelo `id`.
-[] Antes de realizar a remoção, deve ser feito uma validação se o id pertence a uma task salva no banco de dados.
+[x] Deve ser possível remover uma task pelo `id`.
+[x] Antes de realizar a remoção, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
 **PATCH - /tasks/:id/complete**
 [] Deve ser possível marcar a task como completa ou não. Isso significa que se a task estiver concluída, deve voltar ao seu estado "normal".

@@ -47,9 +47,11 @@ export const routes = [
         handler: (request, response) => {
             const { id } = request.params
 
-            database.delete('tasks', id)
-
-            return response.writeHead(204).end()
+            if (database.delete('tasks', id) === true) {
+                return response.writeHead(204).end()
+            } else {
+                return response.writeHead(404).end("Task not found")
+            }
         }
     }
 ]
