@@ -27,18 +27,23 @@ export const routes = [
         handler: (request, response) => {
             const { title, description } = request.body
 
-            const task = {
-                id: randomUUID(),
-                title,
-                description,
-                completed_at: null,
-                created_at: new Date(),
-                updated_at: null,
+            if (title && description) {
+                const task = {
+                    id: randomUUID(),
+                    title,
+                    description,
+                    completed_at: null,
+                    created_at: new Date(),
+                    updated_at: null,
+                }
+
+                database.insert('tasks', task)
+                
+
+                return response.writeHead(201).end()
+            } else {
+                return response.writeHead(404).end("No title or description.")
             }
-
-            database.insert('tasks', task)
-
-            return response.writeHead(201).end()
         }
     },
     {
@@ -50,7 +55,7 @@ export const routes = [
             if (database.delete('tasks', id) === true) {
                 return response.writeHead(204).end()
             } else {
-                return response.writeHead(404).end("Task not found")
+                return response.writeHead(404).end("Task not found.")
             }
         }
     }
