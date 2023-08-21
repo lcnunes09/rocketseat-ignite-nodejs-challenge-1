@@ -11,7 +11,12 @@ export const routes = [
         method: 'GET',
         path: buildRoutePath('/tasks'),
         handler: (request, response) => {
-            const tasks = database.select('tasks')
+            const { search } = request.query
+
+            const tasks = database.select('tasks', search ? {
+                title: search,
+                description: search
+            } : null)
 
             return response.end(JSON.stringify(tasks))
         }
@@ -27,6 +32,8 @@ export const routes = [
                 title,
                 description,
                 completed_at: null,
+                created_at: new Date(),
+                updated_at: null,
             }
 
             database.insert('tasks', task)
