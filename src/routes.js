@@ -107,5 +107,33 @@ export const routes = [
                 JSON.stringify({ message: 'task updated' })
             );
         }
+    },
+    {
+        method: 'PATCH',
+        path: buildRoutePath('/tasks/:id'),
+        handler: (request, response) => {   
+            const { id } = request.params;
+            const completed = {};
+
+            const [task] = database.select('tasks', { id })
+
+            if (!task) {
+                return response.writeHead(404).end(
+                    JSON.stringify({ message: 'task not found' })
+                )
+            } 
+            
+            if (task.completed_at === null) {
+                completed.completed_at = new Date();
+            } else if (task.completed !== null) {
+                completed.completed_at = null;
+            }
+
+            database.update('tasks', id, completed)
+
+            return response.writeHead(204).end(
+                JSON.stringify({ message: 'task updated' })
+            )
+        }
     }
 ]
