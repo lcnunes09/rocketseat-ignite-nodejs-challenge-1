@@ -35,8 +35,8 @@ Antes das rotas, vamos entender qual a estrutura (propriedades) que uma task dev
 [x] Também deve ser possível realizar uma busca, filtrando as tasks pelo `title` e `description`.
 
 **PUT - /tasks/:id**
-[] Deve ser possível atualizar uma task pelo `id`.
-[] No body da requisição, deve receber somente o `title` e/ou `description` para serem atualizados.
+[x] Deve ser possível atualizar uma task pelo `id`.
+[x] No body da requisição, deve receber somente o `title` e/ou `description` para serem atualizados.
 [] Se for enviado somente o `title`, significa que o `description` não pode ser atualizado e vice-versa.
 [] Antes de realizar a atualização, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
@@ -59,6 +59,6 @@ Validar se as propriedades `title` e `description` das rotas POST e PUT estão p
 [x] POST
 
 Nas rotas que recebem o /:id, além de validar se o id existe no banco de dados, retornar a requisição com uma mensagem informando que o registro não existe.
-[] DELETE
+[x] DELETE
 [] PUT
 [] PATCH

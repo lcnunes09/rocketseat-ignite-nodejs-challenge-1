@@ -58,5 +58,42 @@ export const routes = [
                 return response.writeHead(404).end("Task not found.")
             }
         }
+    },
+    {
+        method: 'PUT',
+        path: buildRoutePath('/tasks/:id'),
+        handler: (request, response) => {   
+            const { id } = request.params
+            const updated_at = new Date()
+
+            if (request.body) { 
+                const { title, description } = request.body
+
+                if (title && description) {
+                    database.update('tasks', id, {
+                        title,
+                        description,
+                        updated_at
+                    })
+                } else if (!title && description) {
+                    database.update('tasks', id, {
+                        description,
+                        updated_at
+                    })
+                } else if (title && !description) {
+                    database.update('tasks', id, {
+                        title,
+                        updated_at
+                    })
+                } else {
+                    return response.writeHead(400).end("Title or description are required.")
+                }
+            
+                return response.writeHead(204).end()
+
+            } else {
+                return response.writeHead(400).end("Title or description are required.")
+            }
+        }
     }
 ]
