@@ -37,8 +37,8 @@ Antes das rotas, vamos entender qual a estrutura (propriedades) que uma task dev
 **PUT - /tasks/:id**
 [x] Deve ser possível atualizar uma task pelo `id`.
 [x] No body da requisição, deve receber somente o `title` e/ou `description` para serem atualizados.
-[] Se for enviado somente o `title`, significa que o `description` não pode ser atualizado e vice-versa.
-[] Antes de realizar a atualização, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
+[x] Se for enviado somente o `title`, significa que o `description` não pode ser atualizado e vice-versa.
+[x] Antes de realizar a atualização, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
 **DELETE - /tasks/:id**
 [x] Deve ser possível remover uma task pelo `id`.

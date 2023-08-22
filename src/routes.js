@@ -38,7 +38,6 @@ export const routes = [
                 }
 
                 database.insert('tasks', task)
-                
 
                 return response.writeHead(201).end()
             } else {
@@ -52,8 +51,11 @@ export const routes = [
         handler: (request, response) => {
             const { id } = request.params
 
-            if (database.delete('tasks', id) === true) {
-                return response.writeHead(204).end()
+            const [task] = database.select('tasks', { id })
+
+            if (task) {
+                database.delete('tasks', id)
+                return response.writeHead(204).end("Task deleted.")
             } else {
                 return response.writeHead(404).end("Task not found.")
             }
@@ -66,33 +68,39 @@ export const routes = [
             const { id } = request.params
             const updated_at = new Date()
 
-            if (request.body) { 
-                const { title, description } = request.body
+            const [task] = database.select('tasks', { id })
 
-                if (title && description) {
-                    database.update('tasks', id, {
-                        title,
-                        description,
-                        updated_at
-                    })
-                } else if (!title && description) {
-                    database.update('tasks', id, {
-                        description,
-                        updated_at
-                    })
-                } else if (title && !description) {
-                    database.update('tasks', id, {
-                        title,
-                        updated_at
-                    })
+            if (task) {
+                if (request.body) { 
+                    const { title, description } = request.body
+
+                    if (title && description) {
+                        database.update('tasks', id, {
+                            title,
+                            description,
+                            updated_at
+                        })
+                    } else if (!title && description) {
+                        database.update('tasks', id, {
+                            description,
+                            updated_at
+                        })
+                    } else if (title && !description) {
+                        database.update('tasks', id, {
+                            title,
+                            updated_at
+                        })
+                    } else {
+                        return response.writeHead(400).end("Title or description are required.")
+                    }
+                
+                    return response.writeHead(204).end()
+
                 } else {
                     return response.writeHead(400).end("Title or description are required.")
                 }
-            
-                return response.writeHead(204).end()
-
             } else {
-                return response.writeHead(400).end("Title or description are required.")
+                return response.writeHead(404).end("Task not found.")
             }
         }
     }

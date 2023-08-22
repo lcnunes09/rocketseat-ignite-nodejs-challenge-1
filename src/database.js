@@ -51,11 +51,7 @@ export class Database {
         if (rowIndex > -1) {
             this.#database[table].splice(rowIndex, 1)
             this.#persist()
-
-            return true
-        } else {
-            return false
-        }
+        } 
     }
 
     update(table, id, data) {
