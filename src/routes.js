@@ -81,31 +81,31 @@ export const routes = [
                 );
             }
 
-            const task = database.select('tasks', { id });
+            const [task] = database.select('tasks', { id });
 
-            if (!task) {
+            if (task) {
+                const updatedFields = {};
+
+                if (title) {
+                    updatedFields.title = title;
+                }
+
+                if (description) {
+                    updatedFields.description = description;
+                }
+
+                updatedFields.updated_at = updated_at;
+
+                database.update('tasks', id, updatedFields);
+
+                return response.writeHead(204).end(
+                    JSON.stringify({ message: 'task updated' })
+                );
+            } else {
                 return response.writeHead(404).end(
                     JSON.stringify({ message: 'task not found' })
-                );
+                )
             }
-
-            const updatedFields = {};
-
-            if (title) {
-                updatedFields.title = title;
-            }
-
-            if (description) {
-                updatedFields.description = description;
-            }
-
-            updatedFields.updated_at = updated_at;
-
-            database.update('tasks', id, updatedFields);
-
-            return response.writeHead(204).end(
-                JSON.stringify({ message: 'task updated' })
-            );
         }
     },
     {
@@ -117,23 +117,23 @@ export const routes = [
 
             const [task] = database.select('tasks', { id })
 
-            if (!task) {
+            if (task) {
+                if (task.completed_at === null) {
+                    completed.completed_at = new Date();
+                } else if (task.completed !== null) {
+                    completed.completed_at = null;
+                }
+
+                database.update('tasks', id, completed)
+
+                return response.writeHead(204).end(
+                    JSON.stringify({ message: 'task updated' })
+                )
+            } else {
                 return response.writeHead(404).end(
                     JSON.stringify({ message: 'task not found' })
                 )
-            } 
-            
-            if (task.completed_at === null) {
-                completed.completed_at = new Date();
-            } else if (task.completed !== null) {
-                completed.completed_at = null;
             }
-
-            database.update('tasks', id, completed)
-
-            return response.writeHead(204).end(
-                JSON.stringify({ message: 'task updated' })
-            )
         }
     }
 ]

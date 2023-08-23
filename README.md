@@ -8,9 +8,9 @@ Documentation
 A API deve conter as seguintes funcionalidades:
 [x] Criação de uma task
 [x] Listagem de todas as tasks
-[] Atualização de uma task pelo id
+[x] Atualização de uma task pelo id
 [x] Remover uma task pelo id
-[] Marcar pelo id uma task como completa
+[x] Marcar pelo id uma task como completa
 [] Importação de tasks em massa por um arquivo CSV
 
 ## Rotas e regras de negócio
@@ -45,8 +45,8 @@ Antes das rotas, vamos entender qual a estrutura (propriedades) que uma task dev
 [x] Antes de realizar a remoção, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
 **PATCH - /tasks/:id/complete**
-[] Deve ser possível marcar a task como completa ou não. Isso significa que se a task estiver concluída, deve voltar ao seu estado "normal".
-[] Antes da alteração, deve ser feito uma validação se o id pertence a uma task salva no banco de dados.
+[x] Deve ser possível marcar a task como completa ou não. Isso significa que se a task estiver concluída, deve voltar ao seu estado "normal".
+[x] Antes da alteração, deve ser feito uma validação se o id pertence a uma task salva no banco de dados.
 
 ## Importação de CSV
 
