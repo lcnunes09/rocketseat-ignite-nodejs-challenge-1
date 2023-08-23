@@ -12,7 +12,7 @@ A API deve conter as seguintes funcionalidades:
 - [x] Atualização de uma task pelo id
 - [x] Remover uma task pelo id
 - [x] Marcar pelo id uma task como completa
-- [] Importação de tasks em massa por um arquivo CSV
+- [x] Importação de tasks em massa por um arquivo CSV
 
 ## Rotas e regras de negócio
 

@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto'
 
 import { buildRoutePath } from './utils/build-route-path.js'
 
-const database = new Database
+const database = Database.getInstance();
 
 export const routes = [
     {
@@ -18,6 +18,7 @@ export const routes = [
                 description: search
             } : null)
 
+            console.log(tasks)
             return response.end(JSON.stringify(tasks))
         }
     },

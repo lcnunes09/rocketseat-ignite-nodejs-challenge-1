@@ -5,6 +5,15 @@ const databasePath = new URL('../db.json', import.meta.url)
 export class Database {
     #database = {}
 
+    static instance = null;
+
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Database();
+        }
+        return this.instance;
+    }
+
     constructor () {
         fs.readFile(databasePath, 'utf8')
         .then(data => {
@@ -29,37 +38,36 @@ export class Database {
                 })
             })
         }
-    
         return data
     }
 
-    insert (table, data) {
+    async insert (table, data) {
         if (Array.isArray(this.#database[table])) {
             this.#database[table].push(data)
         } else {
             this.#database[table] = [data]
         }
 
-        this.#persist()
+        await this.#persist()
 
         return data
     }
 
-    delete(table, id) {
+    async delete(table, id) {
         const rowIndex = this.#database[table].findIndex(row => row.id === id)
     
         if (rowIndex > -1) {
             this.#database[table].splice(rowIndex, 1)
-            this.#persist()
+            await this.#persist()
         } 
     }
 
-    update(table, id, data) {
+    async update(table, id, data) {
         const rowIndex = this.#database[table].findIndex(row => row.id === id)
 
         if (rowIndex > -1) {
             this.#database[table][rowIndex] = { ...this.#database[table][rowIndex], ...data }
-            this.#persist();
+            await this.#persist();
         }
     }
 }
